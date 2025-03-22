@@ -50,7 +50,7 @@ class TransactionsFilterBottomSheet extends StatelessWidget {
                             );
                           },
                         );
-                      }).toList(),
+                      }),
                     ],
                   ),
                 ),

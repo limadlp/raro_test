@@ -7,15 +7,15 @@ class TransactionsFilterBloc
   TransactionsFilterBloc()
     : super(
         const TransactionsFilterState({
-          "Posted Date": true,
           "Processed Date": true,
           "Amount": true,
-          "Principal Paid": true,
-          "Interest Paid": true,
-          "Fee": true,
-          "Outstanding Principal": true,
-          "Outstanding Loan Balance": true,
           "Type": true,
+          "Posted Date": false,
+          "Principal Paid": false,
+          "Interest Paid": false,
+          "Fee": false,
+          "Outstanding Principal": false,
+          "Outstanding Loan Balance": false,
         }),
       ) {
     on<ToggleTransactionOption>((event, emit) {

@@ -1,5 +1,5 @@
 import 'package:base_project/src/modules/payments/domain/domain.dart';
-import 'package:base_project/src/modules/payments/presentation/page/widgets/payments_scheduled_tile.dart';
+import 'package:base_project/src/modules/payments/presentation/page/widgets/schedule/payments_scheduled_tile.dart';
 import 'package:flutter/material.dart';
 
 class PaymentsScheduledList extends StatelessWidget {

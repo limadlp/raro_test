@@ -1,3 +1,4 @@
+import 'package:base_project/src/core/ui/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
@@ -9,9 +10,7 @@ class AppWidget extends StatelessWidget {
     return MaterialApp.router(
       routerConfig: Modular.routerConfig,
       title: 'BMG Money',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Color(0xFF232F69)),
-      ),
+      theme: AppTheme.light,
       debugShowCheckedModeBanner: false,
     );
   }

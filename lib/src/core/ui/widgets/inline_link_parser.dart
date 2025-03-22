@@ -1,3 +1,4 @@
+import 'package:base_project/src/core/ui/tokens/app_colors.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
@@ -6,8 +7,9 @@ class InlineLinkParser extends StatelessWidget {
   final void Function(String linkText)? onLinkTap;
   final TextStyle? style;
   final TextStyle? linkStyle;
-  final String delimiter; // Ex: # or any other
+  final String delimiter;
   final Color linkColor;
+  final bool linkDisabled;
 
   const InlineLinkParser({
     super.key,
@@ -16,7 +18,8 @@ class InlineLinkParser extends StatelessWidget {
     this.style,
     this.linkStyle,
     this.delimiter = '#',
-    this.linkColor = Colors.green,
+    this.linkColor = AppColors.link,
+    this.linkDisabled = false,
   });
 
   @override
@@ -29,12 +32,17 @@ class InlineLinkParser extends StatelessWidget {
               if (part.isLink) {
                 return TextSpan(
                   text: part.text,
-                  style: linkStyle ?? TextStyle(color: linkColor),
+                  style:
+                      linkStyle ??
+                      TextStyle(
+                        color:
+                            !linkDisabled ? linkColor : AppColors.textDisabled,
+                      ),
                   recognizer:
-                      TapGestureRecognizer()
-                        ..onTap = () {
-                          onLinkTap?.call(part.text);
-                        },
+                      !linkDisabled && onLinkTap != null
+                          ? (TapGestureRecognizer()
+                            ..onTap = () => onLinkTap!(part.text))
+                          : null,
                 );
               } else {
                 return TextSpan(text: part.text, style: style);
