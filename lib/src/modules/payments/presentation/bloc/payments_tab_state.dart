@@ -1,7 +1,12 @@
+import 'package:equatable/equatable.dart';
+
 enum PaymentsTab { scheduled, transactions }
 
-class PaymentsTabState {
+class PaymentsTabState extends Equatable {
   final PaymentsTab selectedTab;
 
-  PaymentsTabState(this.selectedTab);
+  const PaymentsTabState(this.selectedTab);
+
+  @override
+  List<Object?> get props => [selectedTab];
 }

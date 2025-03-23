@@ -1,4 +1,5 @@
 //TODO: arrumar imports
+// TODO: Quebrar em widgets menores e arrumar pasta de widgets
 
 import 'package:base_project/src/core/ui/tokens/app_colors.dart';
 import 'package:base_project/src/core/ui/widgets/inline_link_parser.dart';
