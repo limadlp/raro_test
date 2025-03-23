@@ -10,6 +10,7 @@ class InlineLinkParser extends StatelessWidget {
   final String delimiter;
   final Color linkColor;
   final bool linkDisabled;
+  final double fontSize;
 
   const InlineLinkParser({
     super.key,
@@ -20,6 +21,7 @@ class InlineLinkParser extends StatelessWidget {
     this.delimiter = '#',
     this.linkColor = AppColors.link,
     this.linkDisabled = false,
+    this.fontSize = 16.0,
   });
 
   @override
@@ -37,6 +39,7 @@ class InlineLinkParser extends StatelessWidget {
                       TextStyle(
                         color:
                             !linkDisabled ? linkColor : AppColors.textDisabled,
+                        fontSize: fontSize,
                       ),
                   recognizer:
                       !linkDisabled && onLinkTap != null
@@ -45,7 +48,12 @@ class InlineLinkParser extends StatelessWidget {
                           : null,
                 );
               } else {
-                return TextSpan(text: part.text, style: style);
+                return TextSpan(
+                  text: part.text,
+                  style:
+                      style?.copyWith(fontSize: fontSize) ??
+                      TextStyle(fontSize: fontSize),
+                );
               }
             }).toList(),
       ),

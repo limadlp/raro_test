@@ -1,3 +1,6 @@
+//TODO: arrumar imports
+
+import 'package:base_project/src/core/ui/tokens/app_colors.dart';
 import 'package:base_project/src/core/ui/widgets/inline_link_parser.dart';
 import 'package:base_project/src/modules/payments/presentation/bloc/payments_bloc.dart';
 import 'package:base_project/src/modules/payments/presentation/bloc/payments_state.dart';
@@ -6,8 +9,10 @@ import 'package:base_project/src/modules/payments/presentation/bloc/payments_tab
 import 'package:base_project/src/modules/payments/presentation/bloc/payments_tab_state.dart';
 import 'package:base_project/src/modules/payments/presentation/bloc/transactions_filter_bloc.dart';
 import 'package:base_project/src/modules/payments/presentation/bloc/transactions_filter_state.dart';
+import 'package:base_project/src/modules/payments/presentation/page/widgets/payment_summary_card.dart';
 import 'package:base_project/src/modules/payments/presentation/page/widgets/payments_tab_bar.dart';
-import 'package:base_project/src/modules/payments/presentation/page/widgets/payments_transaction_tile.dart';
+import 'package:base_project/src/modules/payments/presentation/page/widgets/shimmer/payment_summary_row_shimmer.dart';
+import 'package:base_project/src/modules/payments/presentation/page/widgets/transactions/payments_transaction_tile.dart';
 import 'package:base_project/src/modules/payments/presentation/page/widgets/schedule/payments_scheduled_tile.dart';
 import 'package:base_project/src/modules/payments/presentation/page/widgets/shimmer/payments_scheduled_shimmer_tile.dart';
 import 'package:base_project/src/modules/payments/presentation/page/widgets/shimmer/payments_transaction_shimmer_tile.dart';
@@ -72,21 +77,32 @@ class _PaymentsScrollContentState extends State<PaymentsScrollContent>
                 slivers: [
                   SliverToBoxAdapter(
                     child: Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 24),
+                      child: PaymentsSummaryRowShimmer(),
+                    ),
+                  ),
+                  SliverToBoxAdapter(
+                    child: Padding(
                       padding: const EdgeInsets.all(16),
-                      child: InlineLinkParser(
-                        text: "Do you want to make a payment? #Click here#.",
-                        linkDisabled: true,
-                        onLinkTap: (text) => print("Clicked"),
+                      child: Center(
+                        child: InlineLinkParser(
+                          text: "Do you want to make a payment? #Click here#.",
+                          linkDisabled: true,
+                          onLinkTap: (text) => () {},
+                        ),
                       ),
                     ),
                   ),
-                  PaymentsTabBar(tabController: _tabController),
+                  PaymentsTabBar(
+                    tabController: _tabController,
+                    menuEnabled: false,
+                  ),
                   SliverList(
                     delegate: SliverChildBuilderDelegate((_, index) {
                       return isScheduledTab
                           ? const PaymentsScheduledShimmerTile()
                           : const PaymentsTransactionShimmerTile();
-                    }, childCount: 5),
+                    }, childCount: isScheduledTab ? 3 : 1),
                   ),
                 ],
               );
@@ -94,38 +110,84 @@ class _PaymentsScrollContentState extends State<PaymentsScrollContent>
 
             if (paymentsState is PaymentsLoaded) {
               final paymentsInfo = paymentsState.paymentsInfo;
-
               return CustomScrollView(
                 slivers: [
                   paymentsInfo.paymentsScheduled.isEmpty
                       ? const SliverToBoxAdapter(
                         child: Padding(
-                          padding: EdgeInsets.all(16),
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 16,
+                            vertical: 4,
+                          ),
                           child: SizedBox(),
                         ),
                       )
                       : SliverToBoxAdapter(
-                        child: Padding(
-                          padding: const EdgeInsets.all(16),
-
-                          child: InlineLinkParser(
-                            text:
-                                "Do you want to make a payment? #Click here#.",
-                            onLinkTap: (text) => print("Clicked"),
-                          ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const SizedBox(height: 24),
+                            SingleChildScrollView(
+                              scrollDirection: Axis.horizontal,
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 16,
+                              ),
+                              child: Row(
+                                children: [
+                                  ...paymentsInfo.summary.map(
+                                    (summary) => Padding(
+                                      padding: const EdgeInsets.only(right: 12),
+                                      child: PaymentsSummaryCard(
+                                        label: summary.label,
+                                        value: summary.value,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            const SizedBox(height: 16),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 16,
+                                vertical: 16,
+                              ),
+                              child: Center(
+                                child: InlineLinkParser(
+                                  text:
+                                      "Do you want to make a payment? #Click here#.",
+                                  onLinkTap: (text) => {},
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
-                  PaymentsTabBar(tabController: _tabController),
+                  PaymentsTabBar(
+                    tabController: _tabController,
+                    menuEnabled: paymentsInfo.transactions.isNotEmpty,
+                  ),
                   if (isScheduledTab)
                     paymentsInfo.paymentsScheduled.isEmpty
                         ? SliverFillRemaining(
-                          //TODO: melhorar a mensagem
-                          child: Text("No scheduled payments."),
+                          child: Padding(
+                            padding: const EdgeInsets.all(32.0),
+                            child: Text(
+                              "Once your loan is booked your payment\n schedule will appear here. This process may take\n 1-2 business days.",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontStyle: FontStyle.italic,
+                                fontSize: 14,
+                                color: AppColors.textDisabled,
+                              ),
+                            ),
+                          ),
                         )
                         : SliverList(
                           delegate: SliverChildBuilderDelegate(
                             (context, index) => PaymentsScheduledTile(
                               payment: paymentsInfo.paymentsScheduled[index],
+                              isNext: index == 0,
                             ),
                             childCount: paymentsInfo.paymentsScheduled.length,
                           ),
@@ -138,8 +200,18 @@ class _PaymentsScrollContentState extends State<PaymentsScrollContent>
                       builder: (_, filterState) {
                         if (paymentsInfo.transactions.isEmpty) {
                           return SliverFillRemaining(
-                            //TODO: melhorar a mensagem
-                            child: Text("No transactions available."),
+                            child: Padding(
+                              padding: const EdgeInsets.all(32.0),
+                              child: Text(
+                                "Once you begin your payments they will appear\n here. This process may take 1-2 business days.",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  fontStyle: FontStyle.italic,
+                                  fontSize: 14,
+                                  color: AppColors.textDisabled,
+                                ),
+                              ),
+                            ),
                           );
                         }
 
@@ -154,6 +226,7 @@ class _PaymentsScrollContentState extends State<PaymentsScrollContent>
                         );
                       },
                     ),
+                  SliverToBoxAdapter(child: SizedBox(height: 48)),
                 ],
               );
             }

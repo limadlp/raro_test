@@ -1,3 +1,4 @@
+import 'package:base_project/src/core/ui/tokens/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:base_project/src/modules/payments/presentation/bloc/transactions_filter_bloc.dart';
@@ -21,39 +22,103 @@ class TransactionsFilterBottomSheet extends StatelessWidget {
               availableHeight * 0.9,
             );
 
+            final entries = state.options.entries.toList();
+
             return ConstrainedBox(
               constraints: BoxConstraints(
-                minHeight: sheetHeight, // Usa o máximo disponível
+                minHeight: sheetHeight,
                 maxHeight: sheetHeight,
               ),
-              child: Container(
-                padding: const EdgeInsets.all(16),
-                child: SingleChildScrollView(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      const Text(
-                        "Additional Information",
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 16,
+                      vertical: 12,
+                    ),
+                    child: Row(
+                      children: [
+                        const Expanded(
+                          child: Text(
+                            "Additional information",
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w600,
+                              color: AppColors.textPrimary,
+                            ),
+                          ),
                         ),
-                      ),
-                      const SizedBox(height: 10),
-                      ...state.options.entries.map((entry) {
-                        return CheckboxListTile(
-                          title: Text(entry.key),
-                          value: entry.value,
-                          onChanged: (_) {
-                            context.read<TransactionsFilterBloc>().add(
-                              ToggleTransactionOption(entry.key),
-                            );
-                          },
-                        );
-                      }),
-                    ],
+                        IconButton(
+                          icon: const Icon(Icons.close),
+                          onPressed: () => Navigator.of(context).pop(),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
+                  const Divider(height: 1),
+                  const SizedBox(height: 8),
+
+                  Expanded(
+                    child: ListView.separated(
+                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                      itemCount: entries.length,
+                      separatorBuilder: (_, __) => const SizedBox(height: 0),
+                      itemBuilder: (context, index) {
+                        final entry = entries[index];
+                        final isLocked = index < 3;
+
+                        return Theme(
+                          data: Theme.of(context).copyWith(
+                            checkboxTheme: CheckboxThemeData(
+                              fillColor: WidgetStateProperty.resolveWith<Color>(
+                                (states) {
+                                  if (isLocked) {
+                                    return Colors.grey;
+                                  }
+                                  if (states.contains(WidgetState.selected)) {
+                                    return Colors.green;
+                                  }
+                                  return Colors.white;
+                                },
+                              ),
+                              checkColor: WidgetStateProperty.all(Colors.white),
+                            ),
+                          ),
+                          child: CheckboxListTile(
+                            dense: true,
+                            visualDensity: VisualDensity.compact,
+                            value: isLocked ? true : entry.value,
+                            onChanged:
+                                isLocked
+                                    ? null
+                                    : (_) {
+                                      context
+                                          .read<TransactionsFilterBloc>()
+                                          .add(
+                                            ToggleTransactionOption(entry.key),
+                                          );
+                                    },
+                            title: Text(
+                              entry.key,
+                              style: const TextStyle(
+                                fontSize: 16,
+                                color: AppColors.textSecondary,
+                              ),
+                            ),
+                            controlAffinity: ListTileControlAffinity.leading,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            checkboxShape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(4),
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                ],
               ),
             );
           },

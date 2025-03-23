@@ -36,6 +36,19 @@ class AppTheme {
         //elevation: 0,
         margin: EdgeInsets.zero,
       ),
+
+      bottomSheetTheme: BottomSheetThemeData(backgroundColor: Colors.white),
+
+      checkboxTheme: CheckboxThemeData(
+        fillColor: WidgetStateProperty.resolveWith<Color>((states) {
+          if (states.contains(WidgetState.selected)) {
+            return AppColors.secondary;
+          }
+          return Colors.white;
+        }),
+        checkColor: WidgetStateProperty.all(Colors.white),
+        overlayColor: WidgetStateProperty.all(Colors.transparent),
+      ),
     );
   }
 }
