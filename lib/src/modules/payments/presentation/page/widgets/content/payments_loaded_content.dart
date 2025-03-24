@@ -57,9 +57,12 @@ class PaymentsLoadedContent extends StatelessWidget {
                 ...paymentsInfo.summary.map(
                   (summary) => Padding(
                     padding: const EdgeInsets.only(right: 12),
-                    child: PaymentsSummaryCard(
-                      label: summary.label,
-                      value: summary.value,
+                    child: Semantics(
+                      label: '${summary.label}, ${summary.value}',
+                      child: PaymentsSummaryCard(
+                        label: summary.label,
+                        value: summary.value,
+                      ),
                     ),
                   ),
                 ),
@@ -70,9 +73,12 @@ class PaymentsLoadedContent extends StatelessWidget {
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
             child: Center(
-              child: InlineLinkParser(
-                text: "Do you want to make a payment? #Click here#.",
-                onLinkTap: (text) {},
+              child: Semantics(
+                label: "Do you want to make a payment? Click here.",
+                child: InlineLinkParser(
+                  text: "Do you want to make a payment? #Click here#.",
+                  onLinkTap: (text) {},
+                ),
               ),
             ),
           ),
@@ -83,16 +89,20 @@ class PaymentsLoadedContent extends StatelessWidget {
 
   Widget _buildScheduled(PaymentsInfoEntity paymentsInfo) {
     if (paymentsInfo.paymentsScheduled.isEmpty) {
-      return const SliverFillRemaining(
+      return SliverFillRemaining(
         child: Padding(
           padding: EdgeInsets.all(32.0),
-          child: Text(
-            "Once your loan is booked your payment\n schedule will appear here. This process may take\n 1-2 business days.",
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontStyle: FontStyle.italic,
-              fontSize: 14,
-              color: AppColors.textDisabled,
+          child: Semantics(
+            label:
+                "Once your loan is booked your payment schedule will appear here. This process may take 1-2 business days.",
+            child: Text(
+              "Once your loan is booked your payment\n schedule will appear here. This process may take\n 1-2 business days.",
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontStyle: FontStyle.italic,
+                fontSize: 14,
+                color: AppColors.textDisabled,
+              ),
             ),
           ),
         ),
@@ -101,9 +111,12 @@ class PaymentsLoadedContent extends StatelessWidget {
 
     return SliverList(
       delegate: SliverChildBuilderDelegate(
-        (context, index) => PaymentsScheduledTile(
-          payment: paymentsInfo.paymentsScheduled[index],
-          isNext: index == 0,
+        (context, index) => Semantics(
+          label: index == 0 ? "Next scheduled payment." : "Scheduled payment.",
+          child: PaymentsScheduledTile(
+            payment: paymentsInfo.paymentsScheduled[index],
+            isNext: index == 0,
+          ),
         ),
         childCount: paymentsInfo.paymentsScheduled.length,
       ),
@@ -118,16 +131,20 @@ class PaymentsLoadedContent extends StatelessWidget {
         };
 
         if (paymentsInfo.transactions.isEmpty) {
-          return const SliverFillRemaining(
+          return SliverFillRemaining(
             child: Padding(
               padding: EdgeInsets.all(32.0),
-              child: Text(
-                "Once you begin your payments they will appear\n here. This process may take 1-2 business days.",
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontStyle: FontStyle.italic,
-                  fontSize: 14,
-                  color: AppColors.textDisabled,
+              child: Semantics(
+                label:
+                    "Once you begin your payments they will appear here. This process may take 1-2 business days.",
+                child: Text(
+                  "Once you begin your payments they will appear\n here. This process may take 1-2 business days.",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontStyle: FontStyle.italic,
+                    fontSize: 14,
+                    color: AppColors.textDisabled,
+                  ),
                 ),
               ),
             ),
@@ -136,9 +153,12 @@ class PaymentsLoadedContent extends StatelessWidget {
 
         return SliverList(
           delegate: SliverChildBuilderDelegate(
-            (context, index) => PaymentsTransactionTile(
-              transaction: paymentsInfo.transactions[index],
-              options: options,
+            (context, index) => Semantics(
+              label: "Transaction ${index + 1}.",
+              child: PaymentsTransactionTile(
+                transaction: paymentsInfo.transactions[index],
+                options: options,
+              ),
             ),
             childCount: paymentsInfo.transactions.length,
           ),

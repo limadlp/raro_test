@@ -25,7 +25,7 @@ O objetivo deste teste técnico é avaliar suas habilidades no desenvolvimento d
 
 - [x] **Responsividade:** A interface se adapta corretamente a diferentes tamanhos de tela.
 - [x] **Componentização:** Widgets reutilizáveis separados em arquivos adequados.
-- [x] **Acessibilidade:** Widgets configurados com semântica e uso de tipografia legível.
+- [x] **Acessibilidade:** Widgets configurados com semântica e uso de tipografia legível. _(Parcial com tooltip e semantic em alguns widgets)_
 - [x] **Manutenção:** Nomes de classes, variáveis e métodos claros e semânticos.
 - [x] **Tratamento de Erros:** Estados de erro tratados nos blocos.
 - [x] **Seguir a Arquitetura do Projeto:** Estrutura mantida e expandida conforme padrão do projeto base.
@@ -36,7 +36,7 @@ O objetivo deste teste técnico é avaliar suas habilidades no desenvolvimento d
 
 - [x] Testes unitários escritos para blocos de estado e lógica de filtragem.
 - [x] Testes de widget cobrindo a interface.
-- [x] (Opcional) Testes de integração completos.
+- [x] (Opcional) Testes de integração completos._(parcial)_
 
 > Para rodar os testes:
 
