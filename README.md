@@ -1,3 +1,5 @@
+![Demonstração](demo.gif)
+
 # ✅ Teste Técnico - Desenvolvedor Flutter (Resolvido por Dangeles Lima)
 
 ## Objetivo
