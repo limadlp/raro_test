@@ -1,8 +1,10 @@
 # ✅ Teste Técnico - Desenvolvedor Flutter (Resolvido por Dangeles Lima)
 
-<img src="demo.gif" alt="Demonstração da interface" style="display: block; margin: auto; width: 40%;" />
-
-<p align="center"><i>Demonstração</i></p>
+<table><tr><td align="center">
+  <img src="demo.gif" alt="Demonstração da interface" width="300"/>
+  <br/>
+  <i>Demonstração do app em funcionamento</i>
+</td></tr></table>
 
 ## Objetivo
 
