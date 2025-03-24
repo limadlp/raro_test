@@ -1,4 +1,4 @@
-![Demonstração](demo.gif)
+<img src="demo.gif" alt="Demonstração" width="500"/>
 
 # ✅ Teste Técnico - Desenvolvedor Flutter (Resolvido por Dangeles Lima)
 
