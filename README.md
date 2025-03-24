@@ -122,7 +122,18 @@ main.dart
 
 ---
 
-## ✅ Considerações Finais
+## Como rodar o projeto
+
+Certifique-se de ter o [Flutter](https://flutter.dev/docs/get-started/install) na versão 3.29.0 instalado e um dispositivo/emulador rodando.
+
+No terminal, execute:
+
+```bash
+flutter pub get
+flutter run
+```
+
+## Considerações Finais
 
 O projeto foi desenvolvido conforme a arquitetura fornecida e as boas práticas recomendadas do Flutter. A aplicação segue os princípios da Clean Architecture e os fundamentos SOLID, favorecendo legibilidade, manutenção e escalabilidade. A lógica de filtragem, exibição e estado foi estruturada com BLoC, garantindo organização e previsibilidade. A injeção de dependências foi feita com Flutter Modular, o que favorece o desacoplamento entre as camadas da aplicação. A interface utiliza tokens de cor e tipografia e um tema global para manter a consistência visual, com a UI dividida em widgets bem organizados. Testes foram incluídos para assegurar a estabilidade e confiabilidade do código. Assim, o resultado final é uma aplicação robusta, coesa e alinhada com os objetivos propostos.
 
