@@ -1,11 +1,12 @@
 import 'package:base_project/src/core/ui/tokens/app_typography.dart';
+import 'package:base_project/src/core/ui/widgets/formatted_currency_text.dart';
 import 'package:flutter/material.dart';
 
 class TransactionDetailRow extends StatelessWidget {
   final String leftLabel;
-  final String leftValue;
   final String rightLabel;
-  final String rightValue;
+  final dynamic leftValue;
+  final dynamic rightValue;
 
   const TransactionDetailRow({
     super.key,
@@ -17,6 +18,12 @@ class TransactionDetailRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Widget formatValue(dynamic value) {
+      if (value is Widget) return value;
+      if (value is double) return FormattedCurrencyText(value: value);
+      return Text(value.toString(), style: AppTypography.bodyBold);
+    }
+
     return Row(
       children: [
         Expanded(
@@ -25,7 +32,7 @@ class TransactionDetailRow extends StatelessWidget {
             children: [
               Text(leftLabel, style: AppTypography.caption),
               const SizedBox(height: 1),
-              Text(leftValue, style: AppTypography.bodyBold),
+              formatValue(leftValue),
             ],
           ),
         ),
@@ -35,7 +42,7 @@ class TransactionDetailRow extends StatelessWidget {
             children: [
               Text(rightLabel, style: AppTypography.caption),
               const SizedBox(height: 1),
-              Text(rightValue, style: AppTypography.bodyBold),
+              formatValue(rightValue),
             ],
           ),
         ),

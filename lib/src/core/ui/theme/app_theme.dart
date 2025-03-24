@@ -33,7 +33,6 @@ class AppTheme {
       cardTheme: CardTheme(
         color: Colors.white,
         shadowColor: Colors.transparent,
-        //elevation: 0,
         margin: EdgeInsets.zero,
       ),
 
@@ -46,6 +45,8 @@ class AppTheme {
           }
           return Colors.white;
         }),
+
+        side: const BorderSide(color: AppColors.textPrimary, width: 1.5),
         checkColor: WidgetStateProperty.all(Colors.white),
         overlayColor: WidgetStateProperty.all(Colors.transparent),
       ),

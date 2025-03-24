@@ -1,3 +1,4 @@
+import 'package:base_project/src/core/ui/tokens/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 
@@ -45,17 +46,15 @@ class _PaymentsSummaryCardShimmer extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              /// Label (sem shimmer)
               Text(
                 label,
                 style: const TextStyle(fontSize: 12, color: Colors.black87),
               ),
               const SizedBox(height: 12),
 
-              /// Valor (shimmer)
               Shimmer.fromColors(
-                baseColor: Colors.grey.shade300,
-                highlightColor: Colors.grey.shade100,
+                baseColor: AppColors.shimmerBase,
+                highlightColor: AppColors.shimmerHighlight,
                 child: Container(
                   height: 24,
                   width: 100,

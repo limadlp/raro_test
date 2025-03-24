@@ -10,4 +10,7 @@ class AppColors {
   static const Color textPrimary = Color(0xFF5E646E);
   static const Color textSecondary = Color(0xFF37404E);
   static const Color textDisabled = Color(0xBF868C98);
+
+  static const Color shimmerBase = Color(0xFFF1EFEF);
+  static const Color shimmerHighlight = Color(0xFFF9F8F8);
 }

@@ -1,3 +1,4 @@
+import 'package:base_project/src/core/ui/tokens/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 
@@ -13,8 +14,8 @@ class PaymentsScheduledShimmerTile extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
           child: Shimmer.fromColors(
-            baseColor: Colors.grey[300]!,
-            highlightColor: Colors.grey[100]!,
+            baseColor: AppColors.shimmerBase,
+            highlightColor: AppColors.shimmerHighlight,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [

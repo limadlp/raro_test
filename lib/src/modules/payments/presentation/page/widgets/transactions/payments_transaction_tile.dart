@@ -1,8 +1,10 @@
+// melhorar o shimmer
+
 import 'package:base_project/src/core/core.dart';
+import 'package:base_project/src/core/ui/widgets/formatted_currency_text.dart';
 import 'package:base_project/src/modules/payments/domain/domain.dart';
 import 'package:base_project/src/modules/payments/presentation/page/widgets/transactions/transaction_detail_row.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 
 class PaymentsTransactionTile extends StatelessWidget {
   final PaymentsTransactionsEntity transaction;
@@ -14,19 +16,26 @@ class PaymentsTransactionTile extends StatelessWidget {
     required this.options,
   });
 
+  static const fieldOrder = [
+    'Process date',
+    'Amount',
+    'Type',
+    'Principal',
+    'Late Fee',
+    'Interest',
+    'Principal Balance',
+    'Post date',
+  ];
+
   @override
   Widget build(BuildContext context) {
-    final visibleFields = <_Field>[];
+    final allFields = _buildFields(transaction);
 
-    for (final entry in options.entries) {
-      if (entry.value) {
-        final label = entry.key;
-        final value = _getFormattedValue(label, transaction);
-        if (value != null) {
-          visibleFields.add(_Field(label, value));
-        }
-      }
-    }
+    final visibleFields =
+        fieldOrder
+            .where((label) => options[label] ?? false)
+            .map((label) => _Field(label: label, value: allFields[label]!))
+            .toList();
 
     final rows = <Widget>[];
     for (int i = 0; i < visibleFields.length; i += 2) {
@@ -55,7 +64,7 @@ class PaymentsTransactionTile extends StatelessWidget {
         borderRadius: BorderRadius.circular(8),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withValues(alpha: .05),
+            color: Colors.black.withValues(alpha: 0.05),
             blurRadius: 4,
             offset: const Offset(0, 2),
           ),
@@ -65,37 +74,37 @@ class PaymentsTransactionTile extends StatelessWidget {
     );
   }
 
-  String? _getFormattedValue(String key, PaymentsTransactionsEntity t) {
-    switch (key) {
-      case 'Processed Date':
-        return DateFormat.yMMMd().format(t.processDate);
-      case 'Posted Date':
-        return DateFormat.yMMMd().format(t.actualPaymentPostDate);
-      case 'Amount':
-        return ConverterHelper.currencyFormatter(t.actualPaymentAmount);
-      case 'Principal Paid':
-        return ConverterHelper.currencyFormatter(
-          t.actualPrincipalPaymentAmount,
-        );
-      case 'Interest Paid':
-        return ConverterHelper.currencyFormatter(t.actualInterestPaymentAmount);
-      case 'Fee':
-        return ConverterHelper.currencyFormatter(t.actualFee);
-      case 'Outstanding Principal':
-        return ConverterHelper.currencyFormatter(t.outstandingPrincipalBalance);
-      case 'Outstanding Loan Balance':
-        return ConverterHelper.currencyFormatter(t.outstandingLoanBalance);
-      case 'Type':
-        return t.paymentType;
-      default:
-        return null;
-    }
+  Map<String, dynamic> _buildFields(PaymentsTransactionsEntity t) {
+    return {
+      'Process date': ConverterHelper.stringNullableToMMDDYYYY(
+        t.processDate.toIso8601String(),
+      ),
+      'Amount': FormattedCurrencyText(value: t.actualPaymentAmount),
+      'Type': _mapPaymentType(t.paymentType),
+      'Principal': FormattedCurrencyText(value: t.actualPrincipalPaymentAmount),
+      'Late Fee': FormattedCurrencyText(value: t.actualFee),
+      'Interest': FormattedCurrencyText(value: t.actualInterestPaymentAmount),
+      'Principal Balance': FormattedCurrencyText(
+        value: t.outstandingPrincipalBalance,
+      ),
+      'Post date': ConverterHelper.stringNullableToMMDDYYYY(
+        t.actualPaymentPostDate.toIso8601String(),
+      ),
+    };
+  }
+
+  String _mapPaymentType(String type) {
+    return switch (type) {
+      'PaymentType1' => 'Payroll Deduction',
+      'PaymentType2' => 'Debit Card',
+      _ => type,
+    };
   }
 }
 
 class _Field {
   final String label;
-  final String value;
+  final dynamic value;
 
-  _Field(this.label, this.value);
+  const _Field({required this.label, required this.value});
 }

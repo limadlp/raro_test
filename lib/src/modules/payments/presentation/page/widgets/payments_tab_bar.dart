@@ -44,15 +44,16 @@ class PaymentsTabBar extends StatelessWidget {
                   menuEnabled
                       ? () async {
                         final currentFilters =
-                            BlocProvider.of<TransactionsFilterBloc>(
-                              context,
-                            ).state.filters;
+                            context
+                                .read<TransactionsFilterBloc>()
+                                .state
+                                .filters;
 
-                        final newFilters = await showModalBottomSheet<
+                        final result = await showModalBottomSheet<
                           List<PaymentsTransactionFilter>
                         >(
                           context: context,
-                          isDismissible: true, // arrastar para baixo
+                          isDismissible: true,
                           isScrollControlled: true,
                           backgroundColor: Colors.transparent,
                           builder:
@@ -61,10 +62,10 @@ class PaymentsTabBar extends StatelessWidget {
                               ),
                         );
 
-                        if (newFilters != null && context.mounted) {
-                          BlocProvider.of<TransactionsFilterBloc>(
-                            context,
-                          ).add(SetTransactionFilters(newFilters));
+                        if (result != null && context.mounted) {
+                          context.read<TransactionsFilterBloc>().add(
+                            SetTransactionFilters(result),
+                          );
                         }
                       }
                       : null,
