@@ -22,6 +22,7 @@ class PaymentsPage extends StatelessWidget {
           title: const Text("Payments"),
           actions: [
             IconButton(
+              tooltip: 'Help Menu',
               icon: const Icon(Icons.help_outline),
               onPressed: () => _showHelpDialog(context),
             ),

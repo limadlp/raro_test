@@ -1,6 +1,8 @@
 export 'bottom_sheet/transactions_filter_bottom_sheet.dart';
 export 'schedule/payments_scheduled_tile.dart';
-export 'scroll_content/payments_scroll_content.dart';
+export 'content/payments_scroll_content.dart';
+export 'content/payments_loading_content.dart';
+export 'content/payments_loaded_content.dart';
 export 'shimmer/payment_summary_row_shimmer.dart';
 export 'shimmer/payments_scheduled_shimmer_tile.dart';
 export 'shimmer/payments_transaction_shimmer_tile.dart';

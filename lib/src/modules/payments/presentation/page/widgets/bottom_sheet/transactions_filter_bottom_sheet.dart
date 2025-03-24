@@ -80,6 +80,7 @@ class _TransactionsFilterBottomSheetState
                         ),
                       ),
                       IconButton(
+                        tooltip: 'Close Menu',
                         icon: const Icon(Icons.close),
                         onPressed: _applyAndClose,
                       ),

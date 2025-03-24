@@ -1,14 +1,8 @@
 import 'package:base_project/src/core/core.dart';
 import 'package:base_project/src/modules/payments/data/model/payments/payments_transactions_model.dart';
 import 'package:base_project/src/modules/payments/domain/domain.dart';
-import 'package:base_project/src/modules/payments/presentation/bloc/payments/payments_bloc.dart';
-import 'package:base_project/src/modules/payments/presentation/bloc/payments/payments_state.dart';
-import 'package:base_project/src/modules/payments/presentation/bloc/tab/payments_tab_bloc.dart';
-import 'package:base_project/src/modules/payments/presentation/bloc/tab/payments_tab_state.dart';
-import 'package:base_project/src/modules/payments/presentation/bloc/transactions_filter/payments_transaction_filter.dart';
-import 'package:base_project/src/modules/payments/presentation/bloc/transactions_filter/transactions_filter_bloc.dart';
-import 'package:base_project/src/modules/payments/presentation/bloc/transactions_filter/transactions_filter_state.dart';
-import 'package:base_project/src/modules/payments/presentation/page/widgets/scroll_content/payments_scroll_content.dart';
+import 'package:base_project/src/modules/payments/presentation/bloc/bloc.dart';
+import 'package:base_project/src/modules/payments/presentation/page/widgets/content/payments_scroll_content.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -46,7 +40,6 @@ void main() {
     paymentsTabBloc = MockPaymentsTabBloc();
     filterBloc = MockTransactionsFilterBloc();
 
-    // Corrige erro de stream null
     when(() => paymentsBloc.stream).thenAnswer((_) => const Stream.empty());
     when(() => paymentsTabBloc.stream).thenAnswer((_) => const Stream.empty());
     when(() => filterBloc.stream).thenAnswer((_) => const Stream.empty());
@@ -145,7 +138,7 @@ void main() {
 
       expect(find.byType(CustomScrollView), findsOneWidget);
       expect(find.byType(PaymentsScrollContent), findsOneWidget);
-      expect(find.text('Amount'), findsWidgets); // novo check opcional
+      expect(find.text('Amount'), findsWidgets);
     },
   );
 }

@@ -1,73 +1,114 @@
-# Teste Técnico - Desenvolvedor Flutter
+# ✅ Teste Técnico - Desenvolvedor Flutter (Resolvido por Dangeles Lima)
 
 ## Objetivo
+
 O objetivo deste teste técnico é avaliar suas habilidades no desenvolvimento de interfaces em Flutter, seguindo boas práticas de código, organização do projeto e implementação de testes. Você deverá dar sequência à base do projeto fornecido, reproduzindo a tela conforme o protótipo no [Figma](https://www.figma.com/design/QWC5IksyTx2k65ZzkPz3r1/Processo-seletivo---Dev-flutter?node-id=1-4313&t=WNNCW8T4MMI6Z9M8-1).
 
-***Alguns packages já foram incluídos no projeto, fique a vontade para substitui-los, propor melhorias na arquitetura atual.***
+**_Alguns packages já foram incluídos no projeto, fique à vontade para substituí-los ou propor melhorias na arquitetura atual._**
 
-## Requisitos
-- Implementar uma tela onde o usuário poderá visualizar uma **lista de informações** sobre **transactions** e **schedules**.
-- Implementar um **BottomSheet** que permitirá ocultar ou exibir dados sobre os itens do **schedule**.
-- Seguir as diretrizes do **protótipo no Figma**.
-- Escrever **testes unitários** e **testes de widget**.
-- Utilizar o BLoC como gerenciamento de estado.
-- Comportamentos esperados para a tela:
-  - Em estado de loading os widgets devem exibir um shimmer no lugar dos dados;
-  - A tela deve ter um scroll único de forma geral, não sendo permitido a existência de scrolls aninhados;
+---
 
-## Boas Práticas
-Para garantir um código bem estruturado e manutenível, siga as seguintes diretrizes:
+## ✅ Requisitos
 
-- **Responsividade:** Certifique-se de que a tela funcione corretamente em diferentes tamanhos de dispositivos.
-- **Componentização:** Separe os widgets reutilizáveis para facilitar a organização do código.
-- **Acessibilidade:** Considere a acessibilidade ao desenvolver os componentes visuais.
-- **Manutenção:** Nomeie variáveis, métodos e classes de forma clara e significativa.
-- **Tratamento de Erros:** Implemente tratamento de erros para melhorar a experiência do usuário.
-- **Seguir a Arquitetura do Projeto:** Mantenha o código organizado e dentro da estrutura já existente no projeto base.
+- [x] Implementar uma tela onde o usuário poderá visualizar uma **lista de informações** sobre **transactions** e **schedules**.
+- [x] Implementar um **BottomSheet** que permitirá ocultar ou exibir dados sobre os itens do **schedule**.
+- [x] Seguir as diretrizes do **protótipo no Figma**.
+- [x] Escrever **testes unitários** e **testes de widget**.
+- [x] Utilizar o BLoC como gerenciamento de estado.
+- [x] Comportamentos esperados para a tela:
+  - [x] Em estado de loading os widgets devem exibir um shimmer no lugar dos dados.
+  - [x] A tela deve ter um scroll único de forma geral, **sem scrolls aninhados**.
 
-## Testes
-- É **obrigatório** implementar **testes unitários** para as regras de negócio, validações e/ou camadas que julgar necessário.
-- **Opcional:** Implementação de **testes de integração** para garantir a funcionalidade correta da interface e interação do usuário.
+---
 
-## Entrega
-1. Faça um fork ou clone do repositório base fornecido.
-2. Desenvolva as funcionalidades seguindo os requisitos.
-3. Submeta o código em um repositório público ou envie um link para o repositório privado.
+## ✅ Boas Práticas
 
-Boa sorte! 🚀
+- [x] **Responsividade:** A interface se adapta corretamente a diferentes tamanhos de tela.
+- [x] **Componentização:** Widgets reutilizáveis separados em arquivos adequados.
+- [x] **Acessibilidade:** Widgets configurados com semântica e uso de tipografia legível.
+- [x] **Manutenção:** Nomes de classes, variáveis e métodos claros e semânticos.
+- [x] **Tratamento de Erros:** Estados de erro tratados nos blocos.
+- [x] **Seguir a Arquitetura do Projeto:** Estrutura mantida e expandida conforme padrão do projeto base.
 
-## Informações adicionais
-- Versão do Flutter utilizado para criação do projeto base: 3.29.0;
-- As telas do Figma estão em protótipo, então é possível navegar para entender melhor o comportamento das telas;
-- Estrutura base do Projeto
-  ```
-  lib/
-  └── src/
-      ├── core/
-      │   ├── base/
-      │   │   ├── constants/           # Constantes globais do projeto
-      │   │   ├── errors/              # Definições de erros e exceções
-      │   │   ├── interfaces/          # Interfaces para abstração
-      │   │   ├── base.dart
-      │   ├── utils/                   # Funções auxiliares e extensões
-      │   ├── core.dart                 # Arquivo principal do core
-      ├── modules/
-      │   ├── payments/                 # Módulo de pagamentos
-      │   │   ├── data/                 # Camada de dados
-      │   │   │   ├── datasource/
-      │   │   │   ├── model/
-      │   │   │   ├── repository/
-      │   │   ├── domain/               # Camada de domínio
-      │   │   │   ├── entity/
-      │   │   │   ├── repository/
-      │   │   │   ├── usecase/
-      │   │   ├── infra/                # Infraestrutura
-      │   │   │   ├── datasource/
-      │   │   │   ├── mock/
-      │   │   ├── presentation/         # Camada de apresentação
-      │   │   │   ├── bloc/
-      │   │   │   ├── page/
-      ├── app_widget.dart               # Widget principal do app
-      ├── main.dart                      # Ponto de entrada do app
-  test/                                  # Testes unitários
-  ```
+---
+
+## ✅ Testes
+
+- [x] Testes unitários escritos para blocos de estado e lógica de filtragem.
+- [x] Testes de widget cobrindo a interface.
+- [x] (Opcional) Testes de integração completos.
+
+> Para rodar os testes:
+
+```bash
+flutter test
+flutter test integration_test
+```
+
+---
+
+## ✅ Pacotes utilizados
+
+Além dos que já estavam presentes, os seguintes pacotes foram adicionados:
+
+```yaml
+flutter_modular: ^6.3.4 # Modularização do app
+flutter_bloc: ^9.1.0 # Gerenciamento de estado com BLoC
+shimmer: ^3.0.0 # Efeito shimmer durante o loading
+google_fonts: ^6.2.1 # Fonte Lato utilizada em toda a aplicação
+```
+
+---
+
+## ✅ Estilo e Temas
+
+- Adicionado um arquivo de **theme** separado para centralizar o tema da aplicação.
+- Criados **tokens de cores e tipografia** utilizando a fonte **Lato** via `GoogleFonts`.
+
+---
+
+## ✅ Estrutura do Projeto (atualizada)
+
+```
+lib/
+└── src/
+    ├── core/
+    │   ├── base/
+    │   │   ├── constants/
+    │   │   ├── errors/
+    │   │   ├── interfaces/
+    │   │   └── base.dart
+    │   ├── utils/
+    │   └── core.dart
+    ├── modules/
+    │   ├── payments/
+    │   │   ├── data/
+    │   │   │   ├── datasource/
+    │   │   │   ├── model/
+    │   │   │   └── repository/
+    │   │   ├── domain/
+    │   │   │   ├── entity/
+    │   │   │   ├── repository/
+    │   │   │   └── usecase/
+    │   │   ├── infra/
+    │   │   │   ├── datasource/
+    │   │   │   └── mock/
+    │   │   ├── **presentation/** 🔵 *(adicionado)*
+    │   │   │   ├── **bloc/** 🔵
+    │   │   │   │   ├── payments/
+    │   │   │   │   ├── tab/
+    │   │   │   │   └── transactions_filter/
+    │   │   │   ├── **page/** 🔵
+    │   │   │   │   ├── payments_page.dart
+    │   │   │   │   └── widgets/
+    │   │   │   └── payments_module.dart
+    ├── app_module.dart
+    └── app_widget.dart
+main.dart
+```
+
+---
+
+## ✅ Considerações Finais
+
+O projeto foi desenvolvido respeitando a arquitetura fornecida e seguindo as melhores práticas de desenvolvimento Flutter. Toda a lógica de filtragem, exibição e estados está controlada com BLoC, com separação clara de responsabilidades e uso de temas globais.
