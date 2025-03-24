@@ -10,33 +10,38 @@ O objetivo deste teste técnico é avaliar suas habilidades no desenvolvimento d
 
 ## ✅ Requisitos
 
-- [x] Implementar uma tela onde o usuário poderá visualizar uma **lista de informações** sobre **transactions** e **schedules**.
-- [x] Implementar um **BottomSheet** que permitirá ocultar ou exibir dados sobre os itens do **schedule**.
-- [x] Seguir as diretrizes do **protótipo no Figma**.
-- [x] Escrever **testes unitários** e **testes de widget**.
-- [x] Utilizar o BLoC como gerenciamento de estado.
-- [x] Comportamentos esperados para a tela:
-  - [x] Em estado de loading os widgets devem exibir um shimmer no lugar dos dados.
-  - [x] A tela deve ter um scroll único de forma geral, **sem scrolls aninhados**.
+| Tarefa                                                           | Status |
+| ---------------------------------------------------------------- | ------ |
+| Implementar uma tela com lista de transactions e schedules       | ✅     |
+| Implementar um BottomSheet para ocultar/exibir dados de schedule | ✅     |
+| Seguir as diretrizes do protótipo no Figma                       | ✅     |
+| Escrever testes unitários e testes de widget                     | ✅     |
+| Utilizar o BLoC como gerenciamento de estado                     | ✅     |
+| Exibir shimmer em estado de loading                              | ✅     |
+| Scroll único sem scrolls aninhados                               | ✅     |
 
 ---
 
 ## ✅ Boas Práticas
 
-- [x] **Responsividade:** A interface se adapta corretamente a diferentes tamanhos de tela.
-- [x] **Componentização:** Widgets reutilizáveis separados em arquivos adequados.
-- [x] **Acessibilidade:** Widgets configurados com semântica e uso de tipografia legível. _(Parcial com tooltip e semantic em alguns widgets)_
-- [x] **Manutenção:** Nomes de classes, variáveis e métodos claros e semânticos.
-- [x] **Tratamento de Erros:** Estados de erro tratados nos blocos.
-- [x] **Seguir a Arquitetura do Projeto:** Estrutura mantida e expandida conforme padrão do projeto base.
+| Prática                                                             | Status |
+| ------------------------------------------------------------------- | ------ |
+| Responsividade                                                      | ✅     |
+| Componentização                                                     | ✅     |
+| Acessibilidade _(parcial com tooltip e semantic em alguns widgets)_ | ✅     |
+| Manutenção com código limpo                                         | ✅     |
+| Tratamento de erros nos blocos                                      | ✅     |
+| Seguir a arquitetura do projeto                                     | ✅     |
 
 ---
 
 ## ✅ Testes
 
-- [x] Testes unitários escritos para blocos de estado e lógica de filtragem.
-- [x] Testes de widget cobrindo a interface.
-- [x] (Opcional) Testes de integração completos._(parcial)_
+| Tipo                             | Status |
+| -------------------------------- | ------ |
+| Testes unitários                 | ✅     |
+| Testes de widget                 | ✅     |
+| Testes de integração _(parcial)_ | ✅     |
 
 > Para rodar os testes:
 
@@ -108,6 +113,8 @@ lib/
   └── app_widget.dart
 main.dart
 ```
+
+---
 
 ## ✅ Considerações Finais
 
