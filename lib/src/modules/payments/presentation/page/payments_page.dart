@@ -1,8 +1,5 @@
-import 'package:base_project/src/modules/payments/presentation/bloc/payments/payments_bloc.dart';
-import 'package:base_project/src/modules/payments/presentation/bloc/payments/payments_event.dart';
-import 'package:base_project/src/modules/payments/presentation/bloc/tab/payments_tab_bloc.dart';
-import 'package:base_project/src/modules/payments/presentation/bloc/transactions_filter/transactions_filter_bloc.dart';
-import 'package:base_project/src/modules/payments/presentation/page/widgets/payments_scroll_content.dart';
+import 'package:base_project/src/modules/payments/presentation/bloc/bloc.dart';
+import 'package:base_project/src/modules/payments/presentation/page/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';

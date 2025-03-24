@@ -1,22 +1,8 @@
-//TODO: arrumar imports
 // TODO: Quebrar em widgets menores e arrumar pasta de widgets
 
-import 'package:base_project/src/core/ui/tokens/app_colors.dart';
-import 'package:base_project/src/core/ui/widgets/inline_link_parser.dart';
-import 'package:base_project/src/modules/payments/presentation/bloc/payments/payments_bloc.dart';
-import 'package:base_project/src/modules/payments/presentation/bloc/payments/payments_state.dart';
-import 'package:base_project/src/modules/payments/presentation/bloc/tab/payments_tab_bloc.dart';
-import 'package:base_project/src/modules/payments/presentation/bloc/tab/payments_tab_event.dart';
-import 'package:base_project/src/modules/payments/presentation/bloc/tab/payments_tab_state.dart';
-import 'package:base_project/src/modules/payments/presentation/bloc/transactions_filter/transactions_filter_bloc.dart';
-import 'package:base_project/src/modules/payments/presentation/bloc/transactions_filter/transactions_filter_state.dart';
-import 'package:base_project/src/modules/payments/presentation/page/widgets/payment_summary_card.dart';
-import 'package:base_project/src/modules/payments/presentation/page/widgets/payments_tab_bar.dart';
-import 'package:base_project/src/modules/payments/presentation/page/widgets/shimmer/payment_summary_row_shimmer.dart';
-import 'package:base_project/src/modules/payments/presentation/page/widgets/transactions/payments_transaction_tile.dart';
-import 'package:base_project/src/modules/payments/presentation/page/widgets/schedule/payments_scheduled_tile.dart';
-import 'package:base_project/src/modules/payments/presentation/page/widgets/shimmer/payments_scheduled_shimmer_tile.dart';
-import 'package:base_project/src/modules/payments/presentation/page/widgets/shimmer/payments_transaction_shimmer_tile.dart';
+import 'package:base_project/src/core/ui/ui.dart';
+import 'package:base_project/src/modules/payments/presentation/bloc/bloc.dart';
+import 'package:base_project/src/modules/payments/presentation/page/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

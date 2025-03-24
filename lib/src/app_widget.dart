@@ -15,13 +15,3 @@ class AppWidget extends StatelessWidget {
     );
   }
 }
-
-//TODO: deal with this page
-class PaymentsTransactionsPage extends StatelessWidget {
-  const PaymentsTransactionsPage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(body: Container(color: Color(0xFF232F69)));
-  }
-}

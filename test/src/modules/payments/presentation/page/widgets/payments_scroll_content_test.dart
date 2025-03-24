@@ -5,9 +5,10 @@ import 'package:base_project/src/modules/payments/presentation/bloc/payments/pay
 import 'package:base_project/src/modules/payments/presentation/bloc/payments/payments_state.dart';
 import 'package:base_project/src/modules/payments/presentation/bloc/tab/payments_tab_bloc.dart';
 import 'package:base_project/src/modules/payments/presentation/bloc/tab/payments_tab_state.dart';
+import 'package:base_project/src/modules/payments/presentation/bloc/transactions_filter/payments_transaction_filter.dart';
 import 'package:base_project/src/modules/payments/presentation/bloc/transactions_filter/transactions_filter_bloc.dart';
 import 'package:base_project/src/modules/payments/presentation/bloc/transactions_filter/transactions_filter_state.dart';
-import 'package:base_project/src/modules/payments/presentation/page/widgets/payments_scroll_content.dart';
+import 'package:base_project/src/modules/payments/presentation/page/widgets/scroll_content/payments_scroll_content.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -119,18 +120,24 @@ void main() {
         () => paymentsTabBloc.state,
       ).thenReturn(PaymentsTabState(PaymentsTab.transactions));
       when(() => paymentsBloc.state).thenReturn(PaymentsLoaded(mockInfo));
+
       when(() => filterBloc.state).thenReturn(
-        const TransactionsFilterState({
-          "Processed Date": true,
-          "Amount": true,
-          "Type": true,
-          "Posted Date": false,
-          "Principal Paid": false,
-          "Interest Paid": false,
-          "Fee": false,
-          "Outstanding Principal": false,
-          "Outstanding Loan Balance": false,
-        }),
+        TransactionsFilterState(
+          filters: [
+            PaymentsTransactionFilter(
+              key: 'amount',
+              label: 'Amount',
+              isDefault: true,
+              isSelected: true,
+            ),
+            PaymentsTransactionFilter(
+              key: 'type',
+              label: 'Type',
+              isDefault: true,
+              isSelected: true,
+            ),
+          ],
+        ),
       );
 
       await tester.pumpWidget(buildTestWidget());
@@ -138,6 +145,7 @@ void main() {
 
       expect(find.byType(CustomScrollView), findsOneWidget);
       expect(find.byType(PaymentsScrollContent), findsOneWidget);
+      expect(find.text('Amount'), findsWidgets); // novo check opcional
     },
   );
 }
