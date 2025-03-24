@@ -1,36 +1,70 @@
 import 'package:base_project/src/core/ui/tokens/app_colors.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:base_project/src/modules/payments/presentation/bloc/transactions_filter_bloc.dart';
-import 'package:base_project/src/modules/payments/presentation/bloc/transactions_filter_event.dart';
-import 'package:base_project/src/modules/payments/presentation/bloc/transactions_filter_state.dart';
+import 'package:base_project/src/modules/payments/presentation/bloc/transactions_filter/payments_transaction_filter.dart';
 
-class TransactionsFilterBottomSheet extends StatelessWidget {
-  const TransactionsFilterBottomSheet({super.key});
+class TransactionsFilterBottomSheet extends StatefulWidget {
+  final List<PaymentsTransactionFilter> initialFilters;
+
+  const TransactionsFilterBottomSheet({
+    super.key,
+    required this.initialFilters,
+  });
+
+  @override
+  State<TransactionsFilterBottomSheet> createState() =>
+      _TransactionsFilterBottomSheetState();
+}
+
+class _TransactionsFilterBottomSheetState
+    extends State<TransactionsFilterBottomSheet> {
+  late Map<String, bool> localOptions;
+  bool hasReturnedResult = false;
+
+  @override
+  void initState() {
+    super.initState();
+    localOptions = {for (var f in widget.initialFilters) f.label: f.isSelected};
+  }
+
+  void _applyAndClose() {
+    if (hasReturnedResult) return;
+    hasReturnedResult = true;
+
+    final updatedFilters =
+        widget.initialFilters.map((filter) {
+          return filter.copyWith(
+            isSelected: localOptions[filter.label] ?? filter.isSelected,
+          );
+        }).toList();
+
+    Navigator.of(context).pop(updatedFilters);
+  }
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<TransactionsFilterBloc, TransactionsFilterState>(
-      builder: (context, state) {
-        return LayoutBuilder(
-          builder: (context, constraints) {
-            final availableHeight = constraints.maxHeight;
-            final estimatedContentHeight =
-                (state.options.length * 56.0) + 100.0;
-            final sheetHeight = estimatedContentHeight.clamp(
-              0.0,
-              availableHeight * 0.9,
-            );
+    return NotificationListener<DraggableScrollableNotification>(
+      onNotification: (_) {
+        return false;
+      },
+      child: PopScope(
+        canPop: false,
+        onPopInvokedWithResult: (didPop, _) async {
+          _applyAndClose();
+        },
+        child: DraggableScrollableSheet(
+          expand: false,
+          initialChildSize: 0.6,
+          minChildSize: 0.4,
+          maxChildSize: 0.9,
+          builder: (_, scrollController) {
+            final entries = localOptions.entries.toList();
 
-            final entries = state.options.entries.toList();
-
-            return ConstrainedBox(
-              constraints: BoxConstraints(
-                minHeight: sheetHeight,
-                maxHeight: sheetHeight,
+            return Material(
+              borderRadius: const BorderRadius.vertical(
+                top: Radius.circular(12),
               ),
+              clipBehavior: Clip.antiAlias,
               child: Column(
-                mainAxisSize: MainAxisSize.min,
                 children: [
                   Padding(
                     padding: const EdgeInsets.symmetric(
@@ -51,16 +85,16 @@ class TransactionsFilterBottomSheet extends StatelessWidget {
                         ),
                         IconButton(
                           icon: const Icon(Icons.close),
-                          onPressed: () => Navigator.of(context).pop(),
+                          onPressed: _applyAndClose,
                         ),
                       ],
                     ),
                   ),
                   const Divider(height: 1),
                   const SizedBox(height: 8),
-
                   Expanded(
                     child: ListView.separated(
+                      controller: scrollController,
                       padding: const EdgeInsets.symmetric(horizontal: 16),
                       itemCount: entries.length,
                       separatorBuilder: (_, __) => const SizedBox(height: 0),
@@ -73,9 +107,7 @@ class TransactionsFilterBottomSheet extends StatelessWidget {
                             checkboxTheme: CheckboxThemeData(
                               fillColor: WidgetStateProperty.resolveWith<Color>(
                                 (states) {
-                                  if (isLocked) {
-                                    return Colors.grey;
-                                  }
+                                  if (isLocked) return Colors.grey;
                                   if (states.contains(WidgetState.selected)) {
                                     return Colors.green;
                                   }
@@ -93,11 +125,9 @@ class TransactionsFilterBottomSheet extends StatelessWidget {
                                 isLocked
                                     ? null
                                     : (_) {
-                                      context
-                                          .read<TransactionsFilterBloc>()
-                                          .add(
-                                            ToggleTransactionOption(entry.key),
-                                          );
+                                      setState(() {
+                                        localOptions[entry.key] = !entry.value;
+                                      });
                                     },
                             title: Text(
                               entry.key,
@@ -122,8 +152,8 @@ class TransactionsFilterBottomSheet extends StatelessWidget {
               ),
             );
           },
-        );
-      },
+        ),
+      ),
     );
   }
 }

@@ -1,6 +1,6 @@
-import 'package:base_project/src/modules/payments/presentation/bloc/transactions_filter_bloc.dart';
-import 'package:base_project/src/modules/payments/presentation/bloc/transactions_filter_event.dart';
-import 'package:base_project/src/modules/payments/presentation/bloc/transactions_filter_state.dart';
+import 'package:base_project/src/modules/payments/presentation/bloc/transactions_filter/transactions_filter_bloc.dart';
+import 'package:base_project/src/modules/payments/presentation/bloc/transactions_filter/transactions_filter_event.dart';
+import 'package:base_project/src/modules/payments/presentation/bloc/transactions_filter/transactions_filter_state.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
 

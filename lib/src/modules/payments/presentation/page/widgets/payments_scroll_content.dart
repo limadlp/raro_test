@@ -3,13 +3,13 @@
 
 import 'package:base_project/src/core/ui/tokens/app_colors.dart';
 import 'package:base_project/src/core/ui/widgets/inline_link_parser.dart';
-import 'package:base_project/src/modules/payments/presentation/bloc/payments_bloc.dart';
-import 'package:base_project/src/modules/payments/presentation/bloc/payments_state.dart';
-import 'package:base_project/src/modules/payments/presentation/bloc/payments_tab_bloc.dart';
-import 'package:base_project/src/modules/payments/presentation/bloc/payments_tab_event.dart';
-import 'package:base_project/src/modules/payments/presentation/bloc/payments_tab_state.dart';
-import 'package:base_project/src/modules/payments/presentation/bloc/transactions_filter_bloc.dart';
-import 'package:base_project/src/modules/payments/presentation/bloc/transactions_filter_state.dart';
+import 'package:base_project/src/modules/payments/presentation/bloc/payments/payments_bloc.dart';
+import 'package:base_project/src/modules/payments/presentation/bloc/payments/payments_state.dart';
+import 'package:base_project/src/modules/payments/presentation/bloc/tab/payments_tab_bloc.dart';
+import 'package:base_project/src/modules/payments/presentation/bloc/tab/payments_tab_event.dart';
+import 'package:base_project/src/modules/payments/presentation/bloc/tab/payments_tab_state.dart';
+import 'package:base_project/src/modules/payments/presentation/bloc/transactions_filter/transactions_filter_bloc.dart';
+import 'package:base_project/src/modules/payments/presentation/bloc/transactions_filter/transactions_filter_state.dart';
 import 'package:base_project/src/modules/payments/presentation/page/widgets/payment_summary_card.dart';
 import 'package:base_project/src/modules/payments/presentation/page/widgets/payments_tab_bar.dart';
 import 'package:base_project/src/modules/payments/presentation/page/widgets/shimmer/payment_summary_row_shimmer.dart';
@@ -199,6 +199,11 @@ class _PaymentsScrollContentState extends State<PaymentsScrollContent>
                       TransactionsFilterState
                     >(
                       builder: (_, filterState) {
+                        final options = {
+                          for (var f in filterState.filters)
+                            f.label: f.isSelected,
+                        };
+
                         if (paymentsInfo.transactions.isEmpty) {
                           return SliverFillRemaining(
                             child: Padding(
@@ -215,15 +220,16 @@ class _PaymentsScrollContentState extends State<PaymentsScrollContent>
                             ),
                           );
                         }
-
                         return SliverList(
-                          delegate: SliverChildBuilderDelegate(
-                            (context, index) => PaymentsTransactionTile(
+                          delegate: SliverChildBuilderDelegate((
+                            context,
+                            index,
+                          ) {
+                            return PaymentsTransactionTile(
                               transaction: paymentsInfo.transactions[index],
-                              options: filterState.options,
-                            ),
-                            childCount: paymentsInfo.transactions.length,
-                          ),
+                              options: options,
+                            );
+                          }, childCount: paymentsInfo.transactions.length),
                         );
                       },
                     ),

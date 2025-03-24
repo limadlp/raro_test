@@ -1,8 +1,8 @@
 import 'package:base_project/src/core/core.dart';
 import 'package:base_project/src/modules/payments/domain/domain.dart';
-import 'package:base_project/src/modules/payments/presentation/bloc/payments_bloc.dart';
-import 'package:base_project/src/modules/payments/presentation/bloc/payments_event.dart';
-import 'package:base_project/src/modules/payments/presentation/bloc/payments_state.dart';
+import 'package:base_project/src/modules/payments/presentation/bloc/payments/payments_bloc.dart';
+import 'package:base_project/src/modules/payments/presentation/bloc/payments/payments_event.dart';
+import 'package:base_project/src/modules/payments/presentation/bloc/payments/payments_state.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';

@@ -1,8 +1,9 @@
-import 'package:base_project/src/modules/payments/presentation/bloc/transactions_filter_bloc.dart';
+import 'package:base_project/src/modules/payments/presentation/bloc/transactions_filter/transactions_filter_bloc.dart';
+import 'package:base_project/src/modules/payments/presentation/bloc/transactions_filter/transactions_filter_event.dart';
+import 'package:base_project/src/modules/payments/presentation/bloc/transactions_filter/payments_transaction_filter.dart';
 import 'package:base_project/src/modules/payments/presentation/page/widgets/bottom_sheet/transactions_filter_bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_modular/flutter_modular.dart';
 
 class PaymentsTabBar extends StatelessWidget {
   final TabController tabController;
@@ -35,28 +36,38 @@ class PaymentsTabBar extends StatelessWidget {
                         ? Theme.of(context).iconTheme.color
                         : Theme.of(context).disabledColor,
               ),
-              onPressed:
-                  menuEnabled
-                      ? () {
-                        showModalBottomSheet(
-                          context: context,
-                          shape: const RoundedRectangleBorder(
-                            borderRadius: BorderRadius.vertical(
-                              top: Radius.circular(12),
-                            ),
-                          ),
-                          builder:
-                              (_) => BlocProvider.value(
-                                value: Modular.get<TransactionsFilterBloc>(),
-                                child: const TransactionsFilterBottomSheet(),
-                              ),
-                        );
-                      }
-                      : null,
               tooltip: menuEnabled ? 'Transaction Filters' : 'Menu disabled',
               style: IconButton.styleFrom(
                 shape: const RoundedRectangleBorder(),
               ),
+              onPressed:
+                  menuEnabled
+                      ? () async {
+                        final currentFilters =
+                            BlocProvider.of<TransactionsFilterBloc>(
+                              context,
+                            ).state.filters;
+
+                        final newFilters = await showModalBottomSheet<
+                          List<PaymentsTransactionFilter>
+                        >(
+                          context: context,
+                          isDismissible: true, // arrastar para baixo
+                          isScrollControlled: true,
+                          backgroundColor: Colors.transparent,
+                          builder:
+                              (_) => TransactionsFilterBottomSheet(
+                                initialFilters: currentFilters,
+                              ),
+                        );
+
+                        if (newFilters != null && context.mounted) {
+                          BlocProvider.of<TransactionsFilterBloc>(
+                            context,
+                          ).add(SetTransactionFilters(newFilters));
+                        }
+                      }
+                      : null,
             ),
           ],
         ),
