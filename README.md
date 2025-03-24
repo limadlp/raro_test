@@ -47,7 +47,7 @@ O objetivo deste teste técnico é avaliar suas habilidades no desenvolvimento d
 | -------------------------------- | ------ |
 | Testes unitários                 | ✅     |
 | Testes de widget                 | ✅     |
-| Testes de integração _(parcial)_ | ✅     |
+| Testes de integração _(simples)_ | ✅     |
 
 > Para rodar os testes:
 
@@ -66,9 +66,9 @@ Além dos que já estavam presentes, os seguintes pacotes foram adicionados:
 flutter_modular: ^6.3.4 # Modularização do app
 flutter_bloc: ^9.1.0 # Gerenciamento de estado com BLoC
 shimmer: ^3.0.0 # Efeito shimmer durante o loading
-google_fonts: ^6.2.1 # Fonte Lato utilizada em toda a aplicação
+google_fonts: ^6.2.1 # Para a fonte Lato utilizada em toda a aplicação
 mocktail: ^1.0.4 # Mocking para testes
-bloc_test: ^10.0.0 # Testes específicos para blocos
+bloc_test: ^10.0.0 # Testes específicos para BLoC
 ```
 
 ---
