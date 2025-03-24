@@ -63,7 +63,7 @@ flutter test integration_test
 Além dos que já estavam presentes, os seguintes pacotes foram adicionados:
 
 ```yaml
-flutter_modular: ^6.3.4 # Modularização do app
+flutter_modular: ^6.3.4 # Modularização do app e injeção de dependências
 flutter_bloc: ^9.1.0 # Gerenciamento de estado com BLoC
 shimmer: ^3.0.0 # Efeito shimmer durante o loading
 google_fonts: ^6.2.1 # Para a fonte Lato utilizada em toda a aplicação
@@ -124,4 +124,8 @@ main.dart
 
 ## ✅ Considerações Finais
 
-O projeto foi desenvolvido respeitando a arquitetura fornecida e seguindo as melhores práticas de desenvolvimento Flutter. Toda a lógica de filtragem, exibição e estados está controlada com BLoC, com separação clara de responsabilidades e uso de temas globais.
+O projeto foi desenvolvido conforme a arquitetura fornecida e as boas práticas recomendadas do Flutter. A aplicação segue os princípios da Clean Architecture e os fundamentos SOLID, favorecendo legibilidade, manutenção e escalabilidade. A lógica de filtragem, exibição e estado foi estruturada com BLoC, garantindo organização e previsibilidade. A injeção de dependências foi feita com Flutter Modular, favorecendo o desacoplamento entre as camadas da aplicação. A interface utiliza tokens de cor e tipografia e um tema global para manter a consistência visual, com a UI dividida em widgets bem organizados. Testes foram incluídos para assegurar a estabilidade e confiabilidade do código. Assim, o resultado final é uma aplicação robusta, coesa e alinhada com os objetivos propostos.
+
+---
+
+> Resolvido por Dangeles Lima · 📬 dlplima@hotmail.com
