@@ -56,6 +56,8 @@ flutter_modular: ^6.3.4 # Modularização do app
 flutter_bloc: ^9.1.0 # Gerenciamento de estado com BLoC
 shimmer: ^3.0.0 # Efeito shimmer durante o loading
 google_fonts: ^6.2.1 # Fonte Lato utilizada em toda a aplicação
+mocktail: ^1.0.4 # Mocking para testes
+bloc_test: ^10.0.0 # Testes específicos para blocos
 ```
 
 ---
@@ -72,42 +74,40 @@ google_fonts: ^6.2.1 # Fonte Lato utilizada em toda a aplicação
 ```
 lib/
 └── src/
-    ├── core/
-    │   ├── base/
-    │   │   ├── constants/
-    │   │   ├── errors/
-    │   │   ├── interfaces/
-    │   │   └── base.dart
-    │   ├── utils/
-    │   └── core.dart
-    ├── modules/
-    │   ├── payments/
-    │   │   ├── data/
-    │   │   │   ├── datasource/
-    │   │   │   ├── model/
-    │   │   │   └── repository/
-    │   │   ├── domain/
-    │   │   │   ├── entity/
-    │   │   │   ├── repository/
-    │   │   │   └── usecase/
-    │   │   ├── infra/
-    │   │   │   ├── datasource/
-    │   │   │   └── mock/
-    │   │   ├── **presentation/** 🔵 *(adicionado)*
-    │   │   │   ├── **bloc/** 🔵
-    │   │   │   │   ├── payments/
-    │   │   │   │   ├── tab/
-    │   │   │   │   └── transactions_filter/
-    │   │   │   ├── **page/** 🔵
-    │   │   │   │   ├── payments_page.dart
-    │   │   │   │   └── widgets/
-    │   │   │   └── payments_module.dart
-    ├── app_module.dart
-    └── app_widget.dart
+  ├── core/
+  │   ├── base/
+  │   │   ├── constants/
+  │   │   ├── errors/
+  │   │   ├── interfaces/
+  │   │   └── base.dart
+  │   ├── utils/
+  │   └── core.dart
+  ├── modules/
+  │   ├── payments/
+  │   │   ├── data/
+  │   │   │   ├── datasource/
+  │   │   │   ├── model/
+  │   │   │   └── repository/
+  │   │   ├── domain/
+  │   │   │   ├── entity/
+  │   │   │   ├── repository/
+  │   │   │   └── usecase/
+  │   │   ├── infra/
+  │   │   │   ├── datasource/
+  │   │   │   └── mock/
+  │   │   ├── presentation/ 🔵 *(adicionado)*
+  │   │   │   ├── bloc/ 🔵
+  │   │   │   │   ├── payments/
+  │   │   │   │   ├── tab/
+  │   │   │   │   └── transactions_filter/
+  │   │   │   ├── page/ 🔵
+  │   │   │   │   ├── payments_page.dart
+  │   │   │   │   └── widgets/
+  │   │   │   └── payments_module.dart
+  ├── app_module.dart
+  └── app_widget.dart
 main.dart
 ```
-
----
 
 ## ✅ Considerações Finais
 
