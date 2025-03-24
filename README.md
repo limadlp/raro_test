@@ -1,4 +1,4 @@
-<img src="demo.gif" alt="Demonstração" width="500"/>
+<img src="demo.gif" alt="Demonstração" style="width: 25%;" />
 
 # ✅ Teste Técnico - Desenvolvedor Flutter (Resolvido por Dangeles Lima)
 
