@@ -1,6 +1,8 @@
-<img src="demo.gif" alt="Demonstração" style="width: 25%;" />
-
 # ✅ Teste Técnico - Desenvolvedor Flutter (Resolvido por Dangeles Lima)
+
+<div style="text-align: center;">
+  <img src="demo.gif" alt="Demonstração" style="width: 25%;" />
+</div>
 
 ## Objetivo
 
